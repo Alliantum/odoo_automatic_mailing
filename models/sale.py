@@ -21,6 +21,37 @@ class SaleOrder(models.Model):
         # This is a necessary method because it will decide which report will be used.
         return self.env.ref('odoo_automatic_mailing.automatic_email_template_edi_sale')
 
+    @api.multi
+    def filter_recipients_mailing(self):
+        # It returns the list of emails to be sent, it acts like a queue of pending mails. Filters whether the customer has allowed to send emails.
+        trigger = False
+        recipients = []
+        message = ''
+        if self.partner_id and self.partner_id.email:
+            recipients.append(self.partner_id)
+            trigger = True
+            if self.user_id and self.user_id.os_enable_email_receivable is True and self.user_id.partner_id.email:
+                if recipients:
+                    formatted_emails = recipients[0].email.replace(';', ',')
+                    formatted_emails = [email.strip() for email in formatted_emails.split(',')]
+                    if not self.user_id.partner_id.email.strip() in formatted_emails:
+                        recipients.append(self.user_id.partner_id)
+                    else:
+                        if (self.user_id.partner_id.id != self.partner_invoice_id.id) and (self.user_id.partner_id.id != self.partner_id.id):
+                            formatted_emails.pop(formatted_emails.index(self.user_id.partner_id.email.strip()))
+                            recipients[0].email = ", ".join(formatted_emails)
+                            recipients.append(self.user_id.partner_id)
+            elif self.user_id and self.user_id.os_enable_email_receivable is True and not self.user_id.partner_id.email:
+                message = _(
+                    "{}, the Contact ({}) of this Order ({}) has received an email with this document in pdf attached to it.\n"
+                    " But, you couldn't receive a copy of that because you don't seem to have any email configured in your profile.\n\n"
+                    "Please, be sure to fulfill your email address if you would like to be able to receive copy of these automatic emails.".format(
+                        self.user_id.name, self.partner_id.name, self.name))
+        else:
+            message = _(
+                "The Contact of this Order ({}) couldn't automatically receive the email with the current document.\n\n"
+                " {} doesn't have any Email account assigned to it.".format(self.name, self.partner_id.name))
+        return trigger, recipients, message
 
     @api.multi
     def action_confirm(self):

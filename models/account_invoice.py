@@ -24,7 +24,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def filter_recipients_mailing(self):
-        # It returns the list of emails to be sent, it acts like a queue of pending mails
+        # It returns the list of emails to be sent, it acts like a queue of pending mails. Filters whether the customer has allowed to send emails.
         recipients = []
         message = ''
         recipients.append(self.partner_invoice_id.email and self.partner_invoice_id or self.partner_id.email and self.partner_id)
