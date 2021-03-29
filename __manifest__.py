@@ -14,7 +14,7 @@
     'website': "https://www.alliantum.com",
     'category': 'Technical Settings',
     'version': '0.1',
-    'depends': ['base', 'sale', 'account', 'purchase', 'mail'],
+    'depends': ['base', 'sale', 'account', 'purchase', 'mail', 'odoo_invoice_addresses'],
     'data': [
         'views/res_partner_form.xml',
         'views/res_users_form.xml',
