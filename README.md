@@ -8,9 +8,6 @@
     <a href="http://www.gnu.org/licenses/agpl-3.0-standalone.html">
         <img alt="license" src="https://img.shields.io/badge/license-AGPL--3-blue.svg?style=flat"></img>
     </a>
-    <a href="https://github.com/{user_name}/{repo_name}/releases/latest">
-        <img src="https://img.shields.io/badge/module%20version-1.0.0-F47D42.svg?style=plastic&"></img>
-    </a>
 </p>
 
 <div align="center">
