@@ -7,7 +7,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def get_email_confirmation_template(self):
         # This is a necesary method because it will decide which report will be used.
-        return self.env.ref('odoo_automatic_mailing.automatic_email_template_edi_invoice')
+        return self.env.user.company_id.invoice_automatic_template_id
 
     @api.multi
     def filter_recipients_mailing(self):
@@ -34,6 +34,21 @@ class AccountInvoice(models.Model):
                     self.user_id.name, self.partner_id.name, self.name))
         return recipients, message
 
+    def notify_exception_automatic_mailing(self, message):
+        odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
+        channel_id = self.env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
+        if not channel_id:
+            channel_id = self.env['mail.channel'].with_context(
+                {"mail_create_nosubscribe": True}).create({
+                    'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
+                    'public': 'private',
+                    'channel_type': 'chat',
+                    'email_send': False,
+                    'name': 'OdooBot'
+                })
+        channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
+                                       subtype="mail.mt_comment")
+
     @api.multi
     def action_invoice_open(self):
         # Whenever an invoice is created we need to send an email to the customer
@@ -59,19 +74,9 @@ class AccountInvoice(models.Model):
                                 invoice.sudo(SUPERUSER_ID).with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
                                 invoice.sent = True
                             if message:
-                                odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
-                                channel_id = self.env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
-                                if not channel_id:
-                                    channel_id = self.env['mail.channel'].with_context(
-                                        {"mail_create_nosubscribe": True}).create({
-                                            'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
-                                            'public': 'private',
-                                            'channel_type': 'chat',
-                                            'email_send': False,
-                                            'name': 'OdooBot'
-                                        })
-                                channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
-                                                               subtype="mail.mt_comment")
+                                self.notify_exception_automatic_mailing(message)
+                        else:
+                            self.notify_exception_automatic_mailing(_("Automatic mailing at Invoice validation is not working because the template was not set in the settings."))
                     else:
                         odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
                         channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)

@@ -15,10 +15,11 @@
     'version': '12.0.1.0.0',
     'depends': ['base', 'sale', 'account', 'purchase', 'mail', 'odoo_invoice_addresses'],
     'data': [
-        'views/res_partner_form.xml',
-        'views/res_users_form.xml',
         'data/sale_automatic_template.xml',
         'data/invoice_automatic_template.xml',
         'data/subtype.xml',
+        'views/res_partner_form.xml',
+        'views/res_users_form.xml',
+        'views/res_config_view.xml'
     ],
 }

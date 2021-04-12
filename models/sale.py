@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     @api.multi
     def get_email_confirmation_template(self):
         # This is a necessary method because it will decide which report will be used.
-        return self.env.ref('odoo_automatic_mailing.automatic_email_template_edi_sale')
+        return self.env.user.company_id.sale_automatic_template_id
 
     @api.multi
     def filter_recipients_mailing(self):
@@ -41,6 +41,20 @@ class SaleOrder(models.Model):
                 " {} doesn't have any Email account assigned to it.".format(self.name, self.partner_id.name))
         return trigger, recipients, message
 
+    def notify_exception_automatic_mailing(self, message):
+        odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
+        channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
+        if not channel_id:
+            channel_id = self.env['mail.channel'].with_context({"mail_create_nosubscribe": True}).create({
+                'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
+                'public': 'private',
+                'channel_type': 'chat',
+                'email_send': False,
+                'name': 'OdooBot'
+            })
+        channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
+                                        subtype="mail.mt_comment")
+
     @api.multi
     def action_confirm(self):
         for order in self:
@@ -59,17 +73,8 @@ class SaleOrder(models.Model):
                             partner_ids=[(6, False, [contact.id])],
                             )
                         order.sudo(SUPERUSER_ID).with_context(lang=contact.lang, body_to_lang=contact.lang or 'en_US').message_post_with_template(**post_params)
+                else:
+                    message = _("Automatic mailing at Sale Order confirmation is not working because the template was not set in the settings.")
             if message:
-                odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
-                channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
-                if not channel_id:
-                    channel_id = self.env['mail.channel'].with_context({"mail_create_nosubscribe": True}).create({
-                        'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
-                        'public': 'private',
-                        'channel_type': 'chat',
-                        'email_send': False,
-                        'name': 'OdooBot'
-                    })
-                channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
-                                               subtype="mail.mt_comment")
+                self.notify_exception_automatic_mailing(message)
             return confirm
