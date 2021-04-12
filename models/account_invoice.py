@@ -1,21 +1,8 @@
-# -*- encoding: utf-8 -*-
-
 from odoo import models, api, _, SUPERUSER_ID
-import base64
-
-
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
-
-    @api.multi
-    def _message_auto_subscribe_notify(self, partner_ids, template):
-        # Here we override to avoid notify about contact assigned to invoices. We don't want it if the customer is already going to receive one automatically
-        return
 
     @api.multi
     def get_email_confirmation_template(self):
@@ -51,7 +38,7 @@ class AccountInvoice(models.Model):
     def action_invoice_open(self):
         # Whenever an invoice is created we need to send an email to the customer
         for invoice in self:
-            open = super(AccountInvoice, self).action_invoice_open()
+            res = super(AccountInvoice, self).action_invoice_open()
             if invoice.amount_total > 0 and invoice.type == 'out_invoice':
                 if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
                     if invoice.partner_id.email or invoice.partner_invoice_id.email:
@@ -77,12 +64,12 @@ class AccountInvoice(models.Model):
                                 if not channel_id:
                                     channel_id = self.env['mail.channel'].with_context(
                                         {"mail_create_nosubscribe": True}).create({
-                                        'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
-                                        'public': 'private',
-                                        'channel_type': 'chat',
-                                        'email_send': False,
-                                        'name': 'OdooBot'
-                                    })
+                                            'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
+                                            'public': 'private',
+                                            'channel_type': 'chat',
+                                            'email_send': False,
+                                            'name': 'OdooBot'
+                                        })
                                 channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                                                subtype="mail.mt_comment")
                     else:
@@ -104,4 +91,4 @@ class AccountInvoice(models.Model):
                             " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.number or ''), invoice.partner_id.name or ''))
                         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                                        subtype="mail.mt_comment")
-            return open
+            return res

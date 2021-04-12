@@ -1,3 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from . import account_invoice, res_partner, res_user, sale, mail_template, mail_mail
+from . import account_invoice
+from . import res_partner
+from . import res_user
+from . import sale

@@ -1,20 +1,8 @@
-# -*- encoding: utf-8 -*-
-
 from odoo import models, api, _, SUPERUSER_ID
-import base64
-
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-
-    @api.multi
-    def _message_auto_subscribe_notify(self, partner_ids, template):
-        # Here we override to avoid notify about contact assigned to invoices. We don't want it if the customer is already going to receive one automatically
-        return
 
     @api.multi
     def get_email_confirmation_template(self):
@@ -83,5 +71,5 @@ class SaleOrder(models.Model):
                         'name': 'OdooBot'
                     })
                 channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
-                                            subtype="mail.mt_comment")
+                                               subtype="mail.mt_comment")
             return confirm
