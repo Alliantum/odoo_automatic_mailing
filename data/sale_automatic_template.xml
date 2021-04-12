@@ -2,6 +2,7 @@
 <odoo>
     <!-- Here we create the template of the automatic email for sale orders confirmed -->
     <data noupdate="1"> <!-- this  is important as if the module gets upgraded it would overwrite the edited template -->
+      
         <record id="automatic_email_template_edi_sale" model="mail.template">
             <field name="name">Sales Order: Sent by email</field>
             <field name="model_id" ref="sale.model_sale_order"/>

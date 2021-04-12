@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <!-- Here we create the template of the automatic email for invoices created -->
     <data noupdate="1"> <!-- this  is important as if the module gets upgraded it would overwrite the edited template -->
         <record id="automatic_email_template_edi_invoice" model="mail.template">
@@ -29,5 +30,6 @@
             <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="True"/>
         </record>
+        
     </data>
 </odoo>
