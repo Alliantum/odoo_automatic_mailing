@@ -1,9 +1,12 @@
-from odoo import fields, models
+from odoo import fields, api, models
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-
-    # invoice_automatic_template_id = fields.Many2one('mail.template', default=lambda self: self.env.ref('odoo_automatic_mailing.automatic_email_template_edi_invoice', raise_if_not_found=False))
-    # sale_automatic_template_id = fields.Many2one('mail.template', default=lambda self: self.env.ref('odoo_automatic_mailing.automatic_email_template_edi_sale', raise_if_not_found=False))
     automatic_mailing_rule_ids = fields.One2many(comodel_name='automatic.mailing.rule', inverse_name='company_id')
+
+    @api.model
+    def get_automatic_mailing_template(self, model_name, record):
+        for mailing_rule_id in self.automatic_mailing_rule_ids.filtered(lambda line: line.model_name == model_name):
+            if mailing_rule_id._pass_filter(record):
+                return mailing_rule_id.template_id

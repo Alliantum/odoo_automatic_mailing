@@ -4,11 +4,6 @@ from odoo import models, api, _, SUPERUSER_ID
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    # @api.multi
-    # def get_email_confirmation_template(self):
-    #     # This is a necesary method because it will decide which report will be used.
-    #     return self.env.user.company_id.invoice_automatic_template_id
-
     @api.multi
     def filter_recipients_mailing(self):
         # It returns the list of emails to be sent, it acts like a queue of pending mails. Filters whether the customer has allowed to send emails.
@@ -58,7 +53,7 @@ class AccountInvoice(models.Model):
                 if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
                     if invoice.partner_id.email or invoice.partner_invoice_id.email:
                         to_notify, message = invoice.filter_recipients_mailing()
-                        template_id = invoice.get_email_confirmation_template()
+                        template_id = self.env.user.company_id.get_automatic_mailing_template('account.invoice', invoice)
                         if template_id:
                             for contact in to_notify:
                                 post_params = dict(

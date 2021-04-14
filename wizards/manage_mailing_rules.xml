@@ -11,7 +11,7 @@
                 </p>
                 <field name="company_id" invisible="True" />
                 <field name="automatic_mailing_rule_ids" >
-                    <tree default_order="model">
+                    <tree>
                         <field name="sequence" widget="handle" />
                         <field name="model_id"/>
                         <field name="filter_model_id" readonly="True" string="When"/>

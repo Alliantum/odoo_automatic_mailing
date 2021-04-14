@@ -61,7 +61,7 @@ class SaleOrder(models.Model):
             confirm = super(SaleOrder, order).action_confirm()
             trigger, recipients, message = order.filter_recipients_mailing()
             if trigger:
-                template_id = order.get_email_confirmation_template()
+                template_id = self.env.user.company_id.get_automatic_mailing_template('sale.order', order)
                 if template_id:
                     for contact in recipients:
                         post_params = dict(
