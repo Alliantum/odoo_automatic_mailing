@@ -15,11 +15,14 @@
     'version': '12.0.1.0.0',
     'depends': ['base', 'sale', 'account', 'purchase', 'mail', 'odoo_invoice_addresses'],
     'data': [
+        'security/ir.model.access.csv',
         'data/sale_automatic_template.xml',
         'data/invoice_automatic_template.xml',
         'data/subtype.xml',
         'views/res_partner_form.xml',
         'views/res_users_form.xml',
-        'views/res_config_view.xml'
+        'views/automatic_mailing_rule.xml',
+        'views/res_config_view.xml',
+        'wizards/manage_mailing_rules.xml'
     ],
 }

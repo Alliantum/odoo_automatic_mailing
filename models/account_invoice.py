@@ -4,10 +4,10 @@ from odoo import models, api, _, SUPERUSER_ID
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    @api.multi
-    def get_email_confirmation_template(self):
-        # This is a necesary method because it will decide which report will be used.
-        return self.env.user.company_id.invoice_automatic_template_id
+    # @api.multi
+    # def get_email_confirmation_template(self):
+    #     # This is a necesary method because it will decide which report will be used.
+    #     return self.env.user.company_id.invoice_automatic_template_id
 
     @api.multi
     def filter_recipients_mailing(self):
