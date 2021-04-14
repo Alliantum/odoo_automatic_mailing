@@ -5,11 +5,6 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     @api.multi
-    def get_email_confirmation_template(self):
-        # This is a necessary method because it will decide which report will be used.
-        return self.env.user.company_id.sale_automatic_template_id
-
-    @api.multi
     def filter_recipients_mailing(self):
         # It returns the list of emails to be sent, it acts like a queue of pending mails. Filters whether the customer has allowed to send emails.
         trigger = False
@@ -25,7 +20,7 @@ class SaleOrder(models.Model):
                     if not self.user_id.partner_id.email.strip() in formatted_emails:
                         recipients.append(self.user_id.partner_id)
                     else:
-                        if (self.user_id.partner_id.id != self.partner_invoice_id.id) and (self.user_id.partner_id.id != self.partner_id.id):
+                        if (self.user_id.partner_id != self.partner_invoice_id) and (self.user_id.partner_id != self.partner_id):
                             formatted_emails.pop(formatted_emails.index(self.user_id.partner_id.email.strip()))
                             recipients[0].email = ", ".join(formatted_emails)
                             recipients.append(self.user_id.partner_id)

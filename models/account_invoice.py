@@ -1,8 +1,11 @@
-from odoo import models, api, _, SUPERUSER_ID
+from odoo import models, api, _, fields, SUPERUSER_ID
 
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
+
+    # Added here to make this module copatible with odoo_invoice_addresses
+    partner_invoice_id = fields.Many2one('res.partner')
 
     @api.multi
     def filter_recipients_mailing(self):
@@ -16,8 +19,8 @@ class AccountInvoice(models.Model):
             if not self.user_id.partner_id.email.strip() in formatted_emails:
                 recipients.append(self.user_id.partner_id)
             else:
-                if (self.user_id.partner_id.id != self.partner_invoice_id.id) and (
-                        self.user_id.partner_id.id != self.partner_id.id):
+                if (self.user_id.partner_id != self.partner_invoice_id) and (
+                        self.user_id.partner_id != self.partner_id):
                     formatted_emails.pop(formatted_emails.index(self.user_id.partner_id.email.strip()))
                     recipients[0].email = ", ".join(formatted_emails)
                     recipients.append(self.user_id.partner_id)

@@ -13,7 +13,7 @@
     'website': "https://www.alliantum.com",
     'category': 'Technical Settings',
     'version': '12.0.1.0.0',
-    'depends': ['base', 'sale', 'account', 'purchase', 'mail', 'odoo_invoice_addresses'],
+    'depends': ['base', 'sale', 'account', 'purchase', 'mail'],
     'data': [
         'security/ir.model.access.csv',
         'data/sale_automatic_template.xml',

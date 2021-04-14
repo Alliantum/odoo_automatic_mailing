@@ -23,9 +23,7 @@
 
 ## Installation
 
-This module depends on [this module](https://github.com/Alliantum/odoo_invoice_addresses) in order to work.
-
-Nothing more is required for this installation, just like a regular module. But of course for this to work you will need to have configured your [outgoing mail server](https://www.odoo.com/documentation/user/14.0/discuss/advanced/email_servers.html#how-to-manage-outbound-messages).
+Nothing is required for this application to work, just like a regular module. But of course for this to work you will need to have configured your [outgoing mail server](https://www.odoo.com/documentation/user/14.0/discuss/advanced/email_servers.html#how-to-manage-outbound-messages).
 
 ## Usage
 

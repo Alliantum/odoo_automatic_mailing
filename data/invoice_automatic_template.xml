@@ -26,7 +26,7 @@
             </field>
             <field name="report_template" ref="account.account_invoices"/>
             <field name="report_name">Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
-            <field name="lang">${object.partner_invoice_id.lang}</field>
+            <field name="lang">${object.partner_invoice_id and object.partner_invoice_id.lang or object.partner_id.lang}</field>
             <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="True"/>
         </record>
