@@ -73,8 +73,8 @@ class AccountInvoice(models.Model):
                                 invoice.sent = True
                             if message:
                                 self.notify_exception_automatic_mailing(message)
-                        else:
-                            self.notify_exception_automatic_mailing(_("Automatic mailing at Invoice validation is not working because the template was not set in the settings."))
+                        # else:
+                        #     self.notify_exception_automatic_mailing(_("Automatic mailing at Invoice validation is not working because the template was not set in the settings."))
                     else:
                         odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
                         channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
