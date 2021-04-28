@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='messaging']" position="inside">
                 <group>
-                    <field name="os_enable_email_receivable"/>
+                    <field name="os_enable_email_receivable" readonly="0"/>
                 </group>
             </xpath>
         </field>
@@ -23,7 +23,7 @@
         <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
         <field name="arch" type="xml">
             <field name="email" position="after">
-                <field name="os_enable_email_receivable"/>
+                <field name="os_enable_email_receivable" readonly="0"/>
             </field>
         </field>
     </record>

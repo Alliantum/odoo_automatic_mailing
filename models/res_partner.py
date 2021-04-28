@@ -8,3 +8,4 @@ class ResPartner(models.Model):
     os_invoice_send_option = fields.Selection([
         ('email', "Email"),
         ('post', "Post")], string='Invoice Channel', required=True, default='email', help="Set preference notification type for invoices.")
+    os_enable_email_receivable = fields.Boolean('Enable Mail receivable', help="Automatic mailing on Sale's Order confirmation")
