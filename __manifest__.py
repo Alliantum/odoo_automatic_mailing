@@ -13,7 +13,11 @@
     'website': "https://www.alliantum.com",
     'category': 'Technical Settings',
     'version': '12.0.1.0.0',
-    'depends': ['base', 'sale', 'account', 'purchase', 'mail'],
+    'depends': [
+        'sale',
+        'account',
+        'mail'
+        ],
     'data': [
         'security/ir.model.access.csv',
         'data/sale_automatic_template.xml',
@@ -25,4 +29,7 @@
         'views/res_config_view.xml',
         'wizards/manage_mailing_rules.xml'
     ],
+    'auto_install': False,
+    'application': False,
+    'installable': True,
 }
