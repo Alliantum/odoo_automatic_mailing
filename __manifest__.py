@@ -1,17 +1,11 @@
 {
     'name': "Automatic Mailing",
     'summary': """
-        SO and Invoices automatic mailing on Confirmation""",
-    'description': """
-        Sends email automatically in Sale Orders and Invoices after being confirmed or validated.
-
-        - New field added in Contact form, under tab Invoicing/Invoicing Channel. When set to 'Email'
-        the automated emails will be sent for that contact. If not manually set during contact creation, its value defaults
-        to 'Email'.
-    """,
+        Sale Orders and Invoices automatic mailing at Confirmation""",
     'author': "Alliantum",
     'website': "https://www.alliantum.com",
     'category': 'Technical Settings',
+    'license': 'AGPL-3',
     'version': '12.0.1.0.0',
     'depends': [
         'sale',
