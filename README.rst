@@ -20,7 +20,7 @@ Automatic Mailing
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://shields.io/badge/Alliantum%2fodoo_automatic_mailing-24c3f3?style=for-the-badge&logo=github&label=github
-    :target: https://github.com/Alliantum/odoo_automatic_mailing/tree/master/odoo_automatic_mailing
+    :target: https://github.com/Alliantum/odoo_automatic_mailing/tree/master
     :alt: Alliantum/odoo_automatic_mailing
 
 |badge1| |badge2| |badge3| 
