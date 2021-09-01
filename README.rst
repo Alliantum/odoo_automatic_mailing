@@ -99,9 +99,10 @@ To configure this module, you need to:
    :align: center
 
 
-::
-
-   Enable this option for a Salesperson, is that easy as doing click on the top right corner ( user profile menu) and then clicking on Preferences. There you'll fin the option `Enable Mail Receivable`. Keep it check to start getting the copies of your emails.
+Enable this option for a Salesperson, is that easy as doing click on the
+top right corner ( user profile menu) and then clicking on Preferences.
+There you’ll fin the option ``Enable Mail Receivable``. Keep it check to
+start getting the copies of your emails.
 
 Usage
 =====
