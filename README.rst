@@ -19,16 +19,16 @@ Automatic Mailing
 .. |badge2| image:: https://shields.io/badge/AGPL--3-blue?style=for-the-badge&label=License
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://shields.io/badge/Alliantum%2fodoo_insert_line_position-24c3f3?style=for-the-badge&logo=github&label=github
-    :target: https://github.com/Alliantum/odoo_insert_line_position/tree/master/odoo_automatic_mailing
-    :alt: Alliantum/odoo_insert_line_position
+.. |badge3| image:: https://shields.io/badge/Alliantum%2fodoo_automatic_mailing-24c3f3?style=for-the-badge&logo=github&label=github
+    :target: https://github.com/Alliantum/odoo_automatic_mailing/tree/master/odoo_automatic_mailing
+    :alt: Alliantum/odoo_automatic_mailing
 
 |badge1| |badge2| |badge3| 
 
 
 Some technical modules from Odoo can give you the options for automating
-certain processes under special circunscantes, however, if the only
-thing that you need is decide differents email templates and in which
+certain processes under special circumstances, however, if the only
+thing that you need is decide different email templates and in which
 cases you want them to be sent at Sales Order confirmation or Invoice
 validation, this module makes it really easy to start.
 
@@ -65,7 +65,7 @@ To configure this module, you need to:
    :align: center
 
 
-2. Once you have the rules set, you can enable this behaviour
+2. Once you have the rules set, you can enable this behavior
    specifically for your Contacts. You will find the option under the
    tab ``Invoicing``. Notice here, that the option must be set to
    **Email** in order to activate the automatic mails.
@@ -78,7 +78,7 @@ To configure this module, you need to:
    :align: center
 
 
-3. You can also decide if you want to get a copie of the email just sent
+3. You can also decide if you want to get a copy of the email just sent
    to the customer. These copies will be sent to the Salesperson of the
    Sale Order or Invoice, not the user clicking the button ‘Confirm’ or
    ‘Validate’!
@@ -111,16 +111,16 @@ Sale Orders or Invoices, and confirm or validate it. You’ll see then how
 a new message is posted in the chatter below, with the content of the
 email just sent and the status.
 
-In case you have also configured the email copy for the Saleperson, a
+In case you have also configured the email copy for the Salesperson, a
 second message will be displayed there too.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/Alliantum/odoo_insert_line_position/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/Alliantum/odoo_automatic_mailing/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/Alliantum/odoo_insert_line_position/issues/new?body=module:%20odoo_automatic_mailing%0Aversion:%20master%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/Alliantum/odoo_automatic_mailing/issues/new?body=module:%20odoo_automatic_mailing%0Aversion:%20master%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -135,9 +135,9 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
--  David Moreno david.moreno@opensolutions.net
--  Jose Robles jose.robles@opensolutions.net
--  Iago Alonso iago.alonso@opensolutions.net
+-  David Moreno david.moreno@alliantum.com
+-  Jose Robles jose.robles@alliantum.com
+-  Iago Alonso iago.alonso@alliantum.com
 
 Other credits
 ~~~~~~~~~~~~~

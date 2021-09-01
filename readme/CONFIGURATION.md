@@ -6,13 +6,13 @@ To configure this module, you need to:
         <img src="../static/description/rules.png" width="90%" style="border-radius: 5px;">
     </div>
 
-2. Once you have the rules set, you can enable this behaviour specifically for your Contacts. You will find the option under the tab `Invoicing`. Notice here, that the option must be set to **Email** in order to activate the automatic mails.
+2. Once you have the rules set, you can enable this behavior specifically for your Contacts. You will find the option under the tab `Invoicing`. Notice here, that the option must be set to **Email** in order to activate the automatic mails.
 
     <div align="center" style="margin: 2rem;">
         <img src="../static/description/contact_config.png" width="90%" style="border-radius: 5px;">
     </div>
 
-3. You can also decide if you want to get a copie of the email just sent to the customer. These copies will be sent to the Salesperson of the Sale Order or Invoice, not the user clicking the button 'Confirm' or 'Validate'!
+3. You can also decide if you want to get a copy of the email just sent to the customer. These copies will be sent to the Salesperson of the Sale Order or Invoice, not the user clicking the button 'Confirm' or 'Validate'!
 
     <div align="center" style="margin: 2rem;">
         <img src="../static/description/sale.png" width="90%" style="border-radius: 5px;">

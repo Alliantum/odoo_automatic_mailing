@@ -1,3 +1,3 @@
-- David Moreno <david.moreno@opensolutions.net>
-- Jose Robles <jose.robles@opensolutions.net>
-- Iago Alonso <iago.alonso@opensolutions.net>
+- David Moreno <david.moreno@alliantum.com>
+- Jose Robles <jose.robles@alliantum.com>
+- Iago Alonso <iago.alonso@alliantum.com>
