@@ -1,6 +1,7 @@
 .. image:: static/description/alliantum.png
    :alt: Alliantum
    :width: 100 %
+   :scale: 70 %
    :align: center
 
 =================
