@@ -42,7 +42,6 @@ def extendedformataddr(pair, charset='utf-8'):
 class MailMail(models.Model):
     _inherit = 'mail.mail'
 
-    @api.multi
     def _send_prepare_values(self, partner=None):
         """Return a dictionary for specific email values, depending on a
         partner, or generic to the whole recipients given by mail.email_to.

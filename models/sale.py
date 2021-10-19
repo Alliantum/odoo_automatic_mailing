@@ -4,7 +4,6 @@ from odoo import models, api, _, SUPERUSER_ID
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    @api.multi
     def filter_recipients_mailing(self):
         # It returns the list of emails to be sent, it acts like a queue of pending mails. Filters whether the customer has allowed to send emails.
         trigger = False
@@ -50,7 +49,6 @@ class SaleOrder(models.Model):
         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                         subtype="mail.mt_comment")
 
-    @api.multi
     def action_confirm(self):
         for order in self:
             confirm = super(SaleOrder, order).action_confirm()

@@ -7,7 +7,6 @@ class AccountInvoice(models.Model):
     # Added here to make this module copatible with odoo_invoice_addresses
     partner_invoice_id = fields.Many2one('res.partner')
 
-    @api.multi
     def filter_recipients_mailing(self):
         # It returns the list of emails to be sent, it acts like a queue of pending mails. Filters whether the customer has allowed to send emails.
         recipients = []
@@ -47,7 +46,6 @@ class AccountInvoice(models.Model):
         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                        subtype="mail.mt_comment")
 
-    @api.multi
     def action_invoice_open(self):
         # Whenever an invoice is created we need to send an email to the customer
         for invoice in self:
