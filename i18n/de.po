@@ -224,7 +224,7 @@ msgid "ID"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: model:ir.model,name:odoo_automatic_mailing.model_account_invoice
+#: model:ir.model,name:odoo_automatic_mailing.model_account_move
 msgid "Invoice"
 msgstr "Rechnung"
 
