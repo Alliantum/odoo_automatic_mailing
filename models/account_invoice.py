@@ -2,7 +2,7 @@ from odoo import models, api, _, fields, SUPERUSER_ID
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     # Added here to make this module copatible with odoo_invoice_addresses
     partner_invoice_id = fields.Many2one('res.partner')
