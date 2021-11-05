@@ -54,22 +54,23 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         for order in self:
             confirm = super(SaleOrder, order).action_confirm()
-            trigger, recipients, message = order.filter_recipients_mailing()
-            if trigger:
-                template_id = self.env.user.company_id.get_automatic_mailing_template('sale.order', order)
-                if template_id:
-                    for contact in recipients:
-                        post_params = dict(
-                            template_id=template_id.id,
-                            message_type='comment',
-                            subtype_id=self.env['ir.model.data'].xmlid_to_res_id('odoo_automatic_mailing.mt_automatic_mailing'),
-                            notif_layout='mail.mail_notification_paynow',
-                            attachment_ids=[],
-                            partner_ids=[(6, False, [contact.id])],
-                            )
-                        order.sudo(SUPERUSER_ID).with_context(lang=contact.lang, body_to_lang=contact.lang or 'en_US').message_post_with_template(**post_params)
-                # else:
-                #     message = _("Automatic mailing at Sale Order confirmation is not working because the template was not set in the settings.")
-            if message:
-                self.notify_exception_automatic_mailing(message)
+            if confirm is True:
+                trigger, recipients, message = order.filter_recipients_mailing()
+                if trigger:
+                    template_id = self.env.user.company_id.get_automatic_mailing_template('sale.order', order)
+                    if template_id:
+                        for contact in recipients:
+                            post_params = dict(
+                                template_id=template_id.id,
+                                message_type='comment',
+                                subtype_id=self.env['ir.model.data'].xmlid_to_res_id('odoo_automatic_mailing.mt_automatic_mailing'),
+                                notif_layout='mail.mail_notification_paynow',
+                                attachment_ids=[],
+                                partner_ids=[(6, False, [contact.id])],
+                                )
+                            order.sudo(SUPERUSER_ID).with_context(lang=contact.lang, body_to_lang=contact.lang or 'en_US').message_post_with_template(**post_params)
+                    # else:
+                    #     message = _("Automatic mailing at Sale Order confirmation is not working because the template was not set in the settings.")
+                if message:
+                    self.notify_exception_automatic_mailing(message)
             return confirm
