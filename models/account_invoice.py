@@ -55,7 +55,7 @@ class AccountInvoice(models.Model):
                 if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
                     if invoice.partner_id.email or invoice.partner_invoice_id.email:
                         to_notify, message = invoice.filter_recipients_mailing()
-                        template_id = self.env.user.company_id.get_automatic_mailing_template('account.move', invoice)
+                        template_id = self.env.company.get_automatic_mailing_template('account.move', invoice)
                         if template_id:
                             for contact in to_notify:
                                 post_params = dict(
