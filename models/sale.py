@@ -1,4 +1,5 @@
-from odoo import models, api, _, SUPERUSER_ID
+from odoo import models, api, _
+
 
 
 class SaleOrder(models.Model):
@@ -37,7 +38,7 @@ class SaleOrder(models.Model):
 
     def notify_exception_automatic_mailing(self, message):
         odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
-        channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
+        channel_id = self.with_user(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
         if not channel_id:
             channel_id = self.env['mail.channel'].with_context({"mail_create_nosubscribe": True}).create({
                 'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
@@ -65,7 +66,7 @@ class SaleOrder(models.Model):
                             attachment_ids=[],
                             partner_ids=[(6, False, [contact.id])],
                             )
-                        order.sudo(SUPERUSER_ID).with_context(lang=contact.lang, body_to_lang=contact.lang or 'en_US').message_post_with_template(**post_params)
+                        order.sudo().with_context(lang=contact.lang, body_to_lang=contact.lang or 'en_US').message_post_with_template(**post_params)
                 # else:
                 #     message = _("Automatic mailing at Sale Order confirmation is not working because the template was not set in the settings.")
             if message:

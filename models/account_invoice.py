@@ -1,4 +1,5 @@
-from odoo import models, api, _, fields, SUPERUSER_ID
+from odoo import models, api, _, fields
+
 
 
 class AccountInvoice(models.Model):
@@ -66,16 +67,16 @@ class AccountInvoice(models.Model):
                                     attachment_ids=[],
                                     partner_ids=[(6, False, [contact.id])],
                                 )
-                                lang = contact.lang or invoice.partner_id.lang
-                                invoice.sudo(SUPERUSER_ID).with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
-                                invoice.sent = True
+                                lang = contact.lang or move.partner_id.lang
+                                move.sudo().with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
+                                move.sent = True
                             if message:
                                 self.notify_exception_automatic_mailing(message)
                         # else:
                         #     self.notify_exception_automatic_mailing(_("Automatic mailing at Invoice validation is not working because the template was not set in the settings."))
                     else:
                         odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
-                        channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
+                        channel_id = self.with_user(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
                         if not channel_id:
                             channel_id = self.env['mail.channel'].with_context({"mail_create_nosubscribe": True}).create({
                                 'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
