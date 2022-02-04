@@ -48,7 +48,7 @@ class SaleOrder(models.Model):
                 'name': 'OdooBot'
             })
         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
-                                        subtype="mail.mt_comment")
+                                        subtype_xmlid="mail.mt_comment")
 
     def action_confirm(self):
         for order in self:
@@ -62,7 +62,7 @@ class SaleOrder(models.Model):
                             template_id=template_id.id,
                             message_type='comment',
                             subtype_id=self.env['ir.model.data'].xmlid_to_res_id('odoo_automatic_mailing.mt_automatic_mailing'),
-                            notif_layout='mail.mail_notification_paynow',
+                            email_layout_xmlid='mail.mail_notification_paynow',
                             attachment_ids=[],
                             partner_ids=[(6, False, [contact.id])],
                             )
