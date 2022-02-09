@@ -53,46 +53,43 @@ class AccountInvoice(models.Model):
         for invoice in self:
             confirm = super(AccountInvoice, self).action_invoice_open()
             if confirm is True:
-                if invoice.amount_total > 0 and invoice.type == 'out_invoice':
-                    if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
-                        if invoice.partner_id.email or invoice.partner_invoice_id.email:
-                            to_notify, message = invoice.filter_recipients_mailing()
-                            template_id = self.env.user.company_id.get_automatic_mailing_template('account.invoice', invoice)
-                            if template_id:
-                                for contact in to_notify:
-                                    post_params = dict(
-                                        template_id=template_id.id,
-                                        message_type='comment',
-                                        subtype_id=self.env['ir.model.data'].xmlid_to_res_id(
-                                            'odoo_automatic_mailing.mt_automatic_mailing'),
-                                        notif_layout='mail.mail_notification_paynow',
-                                        attachment_ids=[],
-                                        partner_ids=[(6, False, [contact.id])],
-                                    )
-                                    lang = contact.lang or invoice.partner_id.lang
-                                    invoice.sudo(SUPERUSER_ID).with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
-                                    invoice.sent = True
-                                if message:
-                                    self.notify_exception_automatic_mailing(message)
-                            # else:
-                            #     self.notify_exception_automatic_mailing(_("Automatic mailing at Invoice validation is not working because the template was not set in the settings."))
-                        else:
-                            odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
-                            channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
-                            if not channel_id:
-                                channel_id = self.env['mail.channel'].with_context({"mail_create_nosubscribe": True}).create({
-                                    'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
-                                    'public': 'private',
-                                    'channel_type': 'chat',
-                                    'email_send': False,
-                                    'name': 'OdooBot'
-                                })
-                            name = False
-                            if invoice.sequence_number_next_prefix and invoice.sequence_number_next:
-                                name = invoice.sequence_number_next_prefix + invoice.sequence_number_next
-                            message = _(
-                                "The Contact of this Invoice{}couldn't automatically receive the email with the current document.\n\n"
-                                " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.number or ''), invoice.partner_id.name or ''))
-                            channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
-                                                        subtype="mail.mt_comment")
+                template_id = self.env.user.company_id.get_automatic_mailing_template('account.invoice', invoice)
+                if template_id and invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
+                    if invoice.partner_id.email or invoice.partner_invoice_id.email:
+                        to_notify, message = invoice.filter_recipients_mailing()
+                        template_id = self.env.user.company_id.get_automatic_mailing_template('account.invoice', invoice)
+                        for contact in to_notify:
+                            post_params = dict(
+                                template_id=template_id.id,
+                                message_type='comment',
+                                subtype_id=self.env['ir.model.data'].xmlid_to_res_id(
+                                    'odoo_automatic_mailing.mt_automatic_mailing'),
+                                notif_layout='mail.mail_notification_paynow',
+                                attachment_ids=[],
+                                partner_ids=[(6, False, [contact.id])],
+                            )
+                            lang = contact.lang or invoice.partner_id.lang
+                            invoice.sudo(SUPERUSER_ID).with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
+                            invoice.sent = True
+                        if message:
+                            self.notify_exception_automatic_mailing(message)
+                    else:
+                        odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
+                        channel_id = self.sudo(self.env.user.id).env['mail.channel'].search([('name', '=', 'OdooBot')], limit=1)
+                        if not channel_id:
+                            channel_id = self.env['mail.channel'].with_context({"mail_create_nosubscribe": True}).create({
+                                'channel_partner_ids': [(4, self.env.user.id), (4, odoobot_id)],
+                                'public': 'private',
+                                'channel_type': 'chat',
+                                'email_send': False,
+                                'name': 'OdooBot'
+                            })
+                        name = False
+                        if invoice.sequence_number_next_prefix and invoice.sequence_number_next:
+                            name = invoice.sequence_number_next_prefix + invoice.sequence_number_next
+                        message = _(
+                            "The Contact of this Invoice{}couldn't automatically receive the email with the current document.\n\n"
+                            " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.number or ''), invoice.partner_id.name or ''))
+                        channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
+                                                    subtype="mail.mt_comment")
             return confirm
