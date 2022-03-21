@@ -22,9 +22,9 @@ class AutomaticMailingRule(models.Model):
             :returns: dict -- evaluation context given to safe_eval
         """
         return {
-            'datetime': datetime,
-            'dateutil': dateutil,
-            'time': time,
+            # 'datetime': datetime,
+            # 'dateutil': dateutil,
+            # 'time': time,
             'uid': self.env.uid,
             'user': self.env.user,
         }

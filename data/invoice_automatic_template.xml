@@ -9,25 +9,24 @@
             <field name="email_from">${object.company_id.name} &lt;invoice@${object.company_id.name}.com></field>
             <field name="subject">${object.company_id.name} Invoice (Ref ${object.number or 'n/a'})</field>
             <field name="body_html" type="html">
-<div style="margin: 0px; padding: 0px;">
-    <p style="margin: 0px; padding: 0px; font-size: 13px;">
-        <p>Dear Customer</p>
-        <p>
-          Attached you can find the invoice of your current order.
-        </p>
-        <div>
-          <p>Best regards.</p>
-          <p>
-            ${object.company_id.name}
-          </p>
-        </div>
-    </p>
-</div>
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p>Dear Customer</p>
+                    <p>
+                      Attached you can find the invoice of your current order.
+                    </p>
+                    <div>
+                      <p>Best regards.</p>
+                      <p>
+                        ${object.company_id.name}
+                      </p>
+                    </div>
+                </p>
+            </div>
             </field>
             <field name="report_template" ref="account.account_invoices"/>
             <field name="report_name">Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
             <field name="lang">${object.partner_invoice_id and object.partner_invoice_id.lang or object.partner_id.lang}</field>
-            <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="True"/>
         </record>
 

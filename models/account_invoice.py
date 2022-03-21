@@ -47,11 +47,11 @@ class AccountInvoice(models.Model):
         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                        subtype_xmlid="mail.mt_comment")
 
-    def action_invoice_open(self):
+    def action_post(self):
         # Whenever an invoice is created we need to send an email to the customer
         for invoice in self:
-            res = super(AccountInvoice, self).action_invoice_open()
-            if invoice.amount_total > 0 and invoice.type == 'out_invoice':
+            res = super(AccountInvoice, self).action_post()
+            if invoice.amount_total > 0 and invoice.move_type == 'out_invoice':
                 if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
                     if invoice.partner_id.email or invoice.partner_invoice_id.email:
                         to_notify, message = invoice.filter_recipients_mailing()
@@ -67,9 +67,9 @@ class AccountInvoice(models.Model):
                                     attachment_ids=[],
                                     partner_ids=[(6, False, [contact.id])],
                                 )
-                                lang = contact.lang or move.partner_id.lang
-                                move.sudo().with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
-                                move.sent = True
+                                lang = contact.lang or invoice.partner_id.lang
+                                invoice.sudo().with_context(lang=lang, default_type='binary').message_post_with_template(**post_params)
+                                invoice.is_move_sent = True
                             if message:
                                 self.notify_exception_automatic_mailing(message)
                         # else:
