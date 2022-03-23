@@ -1,8 +1,6 @@
-import datetime
-import time
-import dateutil
 from odoo import fields, models
 from odoo.tools.safe_eval import safe_eval
+
 
 
 class AutomaticMailingRule(models.Model):
@@ -31,5 +29,4 @@ class AutomaticMailingRule(models.Model):
         if self.filter_model_id and records:
             domain = [('id', 'in', records.ids)] + safe_eval(self.filter_model_id, self._get_eval_context())
             return records.search(domain)
-        else:
-            return records
+        return records
