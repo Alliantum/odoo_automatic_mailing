@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* odoo_automatic_mailing
+# 	* odoo_automatic_mailing
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-14 10:48+0000\n"
-"PO-Revision-Date: 2021-04-14 10:48+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2022-04-04 10:37+0000\n"
+"PO-Revision-Date: 2022-04-04 10:37+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,9 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model:mail.template,subject:odoo_automatic_mailing.automatic_email_template_edi_sale
-msgid "${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
+msgid ""
+"${object.company_id.name} ${object.state in ('draft', 'sent') and "
+"'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })"
 msgstr ""
 
 #. module: odoo_automatic_mailing
@@ -32,26 +34,28 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model:mail.template,body_html:odoo_automatic_mailing.automatic_email_template_edi_invoice
-msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        <p>Dear Customer</p>\n"
-"        <p>\n"
-"          Attached you can find the invoice of your current order.\n"
-"        </p>\n"
-"        <div>\n"
-"          <p>Best regards.</p>\n"
-"          <p>\n"
-"            ${object.company_id.name}\n"
-"          </p>\n"
-"        </div>\n"
-"    </p>\n"
-"</div>\n"
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    <p>Dear Customer</p>\n"
+"                    <p>\n"
+"                      Attached you can find the invoice of your current order.\n"
+"                    </p>\n"
+"                    <div>\n"
+"                      <p>Best regards.</p>\n"
+"                      <p>\n"
+"                        ${object.company_id.name}\n"
+"                      </p>\n"
+"                    </div>\n"
+"                </p>\n"
+"            </div>\n"
 "            "
 msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model:mail.template,body_html:odoo_automatic_mailing.automatic_email_template_edi_sale
-msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        <p>Dear Customer</p>\n"
 "        <p>\n"
@@ -73,7 +77,10 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model_terms:ir.ui.view,arch_db:odoo_automatic_mailing.res_config_settings_view_form
-msgid "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
 
 #. module: odoo_automatic_mailing
@@ -83,7 +90,9 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model_terms:ir.ui.view,arch_db:odoo_automatic_mailing.manage_mail_rules_view_form
-msgid "Add or remove here the rules to decide when and which template to use for the automatic mailing."
+msgid ""
+"Add or remove here the rules to decide when and which template to use for "
+"the automatic mailing."
 msgstr ""
 
 #. module: odoo_automatic_mailing
@@ -93,8 +102,8 @@ msgid "Apply On"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: model_terms:ir.ui.view,arch_db:odoo_automatic_mailing.res_config_settings_view_form
 #: model:mail.message.subtype,name:odoo_automatic_mailing.mt_automatic_mailing
+#: model_terms:ir.ui.view,arch_db:odoo_automatic_mailing.res_config_settings_view_form
 msgid "Automatic Mailing"
 msgstr ""
 
@@ -106,18 +115,7 @@ msgid "Automatic Mailing Rule"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: code:addons/odoo_automatic_mailing/models/account_invoice.py:77
-#, python-format
-msgid "Automatic mailing at Invoice validation is not working because the template was not set in the settings."
-msgstr ""
-
-#. module: odoo_automatic_mailing
-#: code:addons/odoo_automatic_mailing/models/sale.py:72
-#, python-format
-msgid "Automatic mailing at Sale Order confirmation is not working because the template was not set in the settings."
-msgstr ""
-
-#. module: odoo_automatic_mailing
+#: model:ir.model.fields,help:odoo_automatic_mailing.field_res_partner__os_enable_email_receivable
 #: model:ir.model.fields,help:odoo_automatic_mailing.field_res_users__os_enable_email_receivable
 msgid "Automatic mailing on Sale's Order confirmation"
 msgstr ""
@@ -131,11 +129,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_automatic_mailing_rule__company_id
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_manage_mailing_rules__company_id
 msgid "Company"
-msgstr ""
-
-#. module: odoo_automatic_mailing
-#: model:ir.model,name:odoo_automatic_mailing.model_res_config_settings
-msgid "Config Settings"
 msgstr ""
 
 #. module: odoo_automatic_mailing
@@ -157,21 +150,29 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model_terms:ir.ui.view,arch_db:odoo_automatic_mailing.res_config_settings_view_form
-msgid "Decide the email templates to be used at the Validation automatic mailing."
+msgid ""
+"Decide the email templates to be used at the Validation automatic mailing."
 msgstr ""
 
 #. module: odoo_automatic_mailing
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_move__display_name
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_automatic_mailing_rule__display_name
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_mail_mail__display_name
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_manage_mailing_rules__display_name
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_company__display_name
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_partner__display_name
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_users__display_name
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_sale_order__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: selection:res.partner,os_invoice_send_option:0
+#: model:ir.model.fields.selection,name:odoo_automatic_mailing.selection__res_partner__os_invoice_send_option__email
 msgid "Email"
 msgstr ""
 
 #. module: odoo_automatic_mailing
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_partner__os_enable_email_receivable
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_users__os_enable_email_receivable
 msgid "Enable Mail receivable"
 msgstr ""
@@ -187,14 +188,15 @@ msgid "Filtering"
 msgstr ""
 
 #. module: odoo_automatic_mailing
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_move__id
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_automatic_mailing_rule__id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_mail_mail__id
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_manage_mailing_rules__id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_company__id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_partner__id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_users__id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_sale_order__id
 msgid "ID"
-msgstr ""
-
-#. module: odoo_automatic_mailing
-#: model:ir.model,name:odoo_automatic_mailing.model_account_move
-msgid "Invoice"
 msgstr ""
 
 #. module: odoo_automatic_mailing
@@ -205,12 +207,25 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model:mail.template,report_name:odoo_automatic_mailing.automatic_email_template_edi_invoice
-msgid "Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
+msgid ""
+"Invoice_${(object.number or '').replace('/','_')}${object.state == 'draft' "
+"and '_draft' or ''}"
 msgstr ""
 
 #. module: odoo_automatic_mailing
+#: model:ir.model,name:odoo_automatic_mailing.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: odoo_automatic_mailing
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_move____last_update
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_automatic_mailing_rule____last_update
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_mail_mail____last_update
 #: model:ir.model.fields,field_description:odoo_automatic_mailing.field_manage_mailing_rules____last_update
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_company____last_update
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_partner____last_update
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_res_users____last_update
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_sale_order____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -254,18 +269,20 @@ msgid "Outgoing Mails"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_invoice__partner_invoice_id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_bank_statement_line__partner_invoice_id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_move__partner_invoice_id
+#: model:ir.model.fields,field_description:odoo_automatic_mailing.field_account_payment__partner_invoice_id
 msgid "Partner Invoice"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: selection:res.partner,os_invoice_send_option:0
+#: model:ir.model.fields.selection,name:odoo_automatic_mailing.selection__res_partner__os_invoice_send_option__post
 msgid "Post"
 msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model:ir.model,name:odoo_automatic_mailing.model_sale_order
-msgid "Sale Order"
+msgid "Sales Order"
 msgstr ""
 
 #. module: odoo_automatic_mailing
@@ -285,17 +302,19 @@ msgid "Templates Selection"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: code:addons/odoo_automatic_mailing/models/account_invoice.py:94
+#: code:addons/odoo_automatic_mailing/models/account_invoice.py:0
 #, python-format
-msgid "The Contact of this Invoice{}couldn't automatically receive the email with the current document.\n"
+msgid ""
+"The Contact of this Invoice{}couldn't automatically receive the email with the current document.\n"
 "\n"
 " {} doesn't have any Email account assigned to it."
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: code:addons/odoo_automatic_mailing/models/sale.py:36
+#: code:addons/odoo_automatic_mailing/models/sale.py:0
 #, python-format
-msgid "The Contact of this Order ({}) couldn't automatically receive the email with the current document.\n"
+msgid ""
+"The Contact of this Order ({}) couldn't automatically receive the email with the current document.\n"
 "\n"
 " {} doesn't have any Email account assigned to it."
 msgstr ""
@@ -316,12 +335,12 @@ msgid "When"
 msgstr ""
 
 #. module: odoo_automatic_mailing
-#: code:addons/odoo_automatic_mailing/models/account_invoice.py:31
-#: code:addons/odoo_automatic_mailing/models/sale.py:31
+#: code:addons/odoo_automatic_mailing/models/account_invoice.py:0
+#: code:addons/odoo_automatic_mailing/models/sale.py:0
 #, python-format
-msgid "{}, the Contact ({}) of this Order ({}) has received an email with this document in pdf attached to it.\n"
+msgid ""
+"{}, the Contact ({}) of this Order ({}) has received an email with this document in pdf attached to it.\n"
 " But, you couldn't receive a copy of that because you don't seem to have any email configured in your profile.\n"
 "\n"
 "Please, be sure to fulfill your email address if you would like to be able to receive copy of these automatic emails."
 msgstr ""
-
