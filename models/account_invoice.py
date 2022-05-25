@@ -48,9 +48,10 @@ class AccountInvoice(models.Model):
                                        subtype_xmlid="mail.mt_comment")
 
     def _post(self, soft=True):
+        res = super()._post(soft)
         # Whenever an invoice is created we need to send an email to the customer
         for invoice in self:
-            res = super()._post(soft)
+            
             if invoice.amount_total > 0 and invoice.move_type == 'out_invoice':
                 if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
                     if invoice.partner_id.email or invoice.partner_invoice_id.email:
@@ -93,4 +94,4 @@ class AccountInvoice(models.Model):
                             " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.number or ''), invoice.partner_id.name or ''))
                         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                                        subtype_xmlid="mail.mt_comment")
-            return res
+        return res
