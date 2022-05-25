@@ -5,6 +5,8 @@ permissions:
 
 on:
   push:
+    branches:
+      - "12.0"
 
 jobs:
   release:
