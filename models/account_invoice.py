@@ -91,7 +91,7 @@ class AccountInvoice(models.Model):
                             name = invoice.sequence_number_next_prefix + invoice.sequence_number_next
                         message = _(
                             "The Contact of this Invoice{}couldn't automatically receive the email with the current document.\n\n"
-                            " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.number or ''), invoice.partner_id.name or ''))
+                            " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.name or ''), invoice.partner_id.name or ''))
                         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                                        subtype_xmlid="mail.mt_comment")
         return res
