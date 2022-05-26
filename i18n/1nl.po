@@ -337,7 +337,7 @@ msgstr "De contactpersoon van deze bestelling ({}) kon de e-mail met het huidige
 
 #. module: odoo_automatic_mailing
 #: model:mail.message.subtype,description:odoo_automatic_mailing.mt_automatic_mailing
-msgid "Used by Automatic Mailing."
+msgid "Automatically Sent.."
 msgstr "Gebruikt door Automatic Mailing."
 
 #. module: odoo_automatic_mailing

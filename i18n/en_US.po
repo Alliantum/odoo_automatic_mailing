@@ -321,7 +321,7 @@ msgstr ""
 
 #. module: odoo_automatic_mailing
 #: model:mail.message.subtype,description:odoo_automatic_mailing.mt_automatic_mailing
-msgid "Used by Automatic Mailing."
+msgid "Automatically Sent.."
 msgstr ""
 
 #. module: odoo_automatic_mailing
