@@ -51,7 +51,7 @@ class AccountInvoice(models.Model):
         res = super()._post(soft)
         # Whenever an invoice is created we need to send an email to the customer
         for invoice in self:
-            
+
             if invoice.amount_total > 0 and invoice.move_type == 'out_invoice':
                 if invoice.partner_id and invoice.partner_id.os_invoice_send_option == 'email':
                     if invoice.partner_id.email or invoice.partner_invoice_id.email:
@@ -86,12 +86,16 @@ class AccountInvoice(models.Model):
                                 'email_send': False,
                                 'name': 'OdooBot'
                             })
-                        name = False
-                        if invoice.sequence_number_next_prefix and invoice.sequence_number_next:
-                            name = invoice.sequence_number_next_prefix + invoice.sequence_number_next
+                        name = invoice.name
+                        if name == '/' and invoice.sequence_prefix and invoice.sequence_number:
+                            name = invoice.sequence_prefix + invoice.sequence_number
                         message = _(
                             "The Contact of this Invoice{}couldn't automatically receive the email with the current document.\n\n"
-                            " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or invoice.name or ''), invoice.partner_id.name or ''))
+                            " {} doesn't have any Email account assigned to it.".format(' ({}) '.format(name or ''), invoice.partner_id.name or ''))
                         channel_id.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment",
                                                        subtype_xmlid="mail.mt_comment")
         return res
+
+
+
+
